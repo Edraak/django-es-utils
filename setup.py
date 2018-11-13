@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
 
 setup(
     name="django_es_utils",
-    version="1.0.2",
+    version="1.0.3",
     url="https://github.com/Edraak/django-es-utils",
     description="Elasticsearch utilities for Django projects.",
     long_description=long_description,

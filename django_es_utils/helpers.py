@@ -33,7 +33,7 @@ def is_sync_feature_on():
 
     :return: True if sync feature is on. Otherwise, False.
     """
-    return settings.FEATURES['ES_SYNC_FEATURE']
+    return settings.ES_SYNC_FEATURE
 
 
 def create_mappings(classes):
@@ -152,6 +152,9 @@ def delete_es_document(document_id, index_name):
     :param index_name: ES index name
     :return: Void
     """
+    if not is_sync_feature_on():
+        return
+
     try:
         Search(index=index_name, using=connection.get_connection()).query('match', _id=str(document_id)).delete()
     except ConnectionError:
