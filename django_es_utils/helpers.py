@@ -20,6 +20,10 @@ def run_async(func):
     """
     @wraps(func)
     def async_func(*args, **kwargs):
+        run_func_async = kwargs.get('async', True)
+        if not run_func_async:
+            return func(*args, **kwargs)
+
         func_hl = Thread(target=func, args=args, kwargs=kwargs)
         func_hl.start()
         return func_hl
@@ -48,11 +52,12 @@ def create_mappings(classes):
         Cls.init()
 
 
-def index_data(models):
+def index_data(models, async=False):
     """
     Index all needed objects.
 
     :param models: Models that should be indexed.
+    :param async: index data to Elasticsearch asynchronously.
     :return: No return value (Void)
     """
     for model in models:
@@ -63,7 +68,7 @@ def index_data(models):
             except AttributeError:
                 # In case instance doesn't have can_index function
                 pass
-            obj.indexing(new=True)
+            obj.indexing(new=True, async=async)
 
 
 def update_nested_dict(orig_dict, new_dict):
@@ -88,7 +93,7 @@ def update_nested_dict(orig_dict, new_dict):
 
 
 @run_async
-def index_obj_async(func, args, kwargs):
+def index_obj(func, args, kwargs, async=True):
     """
     Indexes (create/update) object to Elasticsearch.
 
@@ -137,19 +142,22 @@ def es_indexing(func):
     def func_wrapper(*args, **kwargs):
         if not is_sync_feature_on():
             return
-        return index_obj_async(func, args, kwargs)
+
+        run_func_async = kwargs.get('async', True)
+        return index_obj(func, args, kwargs, async=run_func_async)
 
     return func_wrapper
 
 
 @run_async
-def delete_es_document(document_id, index_name):
+def delete_es_document(document_id, index_name, async=True):
     """
     Deletes a document from Elasticsearch index.
     In case the deletion process is failed it will log an error.
 
     :param document_id: object id
     :param index_name: ES index name
+    :param async: delete object from Elasticsearch asynchronously.
     :return: Void
     """
     if not is_sync_feature_on():
