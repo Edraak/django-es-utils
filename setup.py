@@ -24,6 +24,6 @@ setup(
         "urllib3>= 1.21.1, < 1.22",
         "elasticsearch==6.3.0",
         "elasticsearch_dsl==6.2.1",
-        "ElasticMock==1.3.2"
+        "ElasticMock==1.3.6"
     ],
 )
