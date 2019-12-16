@@ -19,7 +19,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "Django==1.8",
+        "Django==1.11.20",
         "requests",
         "urllib3>= 1.21.1, < 1.22",
         "elasticsearch==6.3.0",
