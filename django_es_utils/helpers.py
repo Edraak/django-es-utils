@@ -37,7 +37,7 @@ def is_sync_feature_on():
 
     :return: True if sync feature is on. Otherwise, False.
     """
-    return settings.ES_SYNC_FEATURE
+    return settings.ES_SYNC_FEATURE and not settings.IS_TESTING
 
 
 def create_mappings(classes):

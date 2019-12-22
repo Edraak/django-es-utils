@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
 
 setup(
     name="django_es_utils",
-    version="0.0.3",
+    version="0.0.4",
     url="https://github.com/Edraak/django-es-utils",
     description="Elasticsearch utilities for Django projects.",
     long_description=long_description,
@@ -19,11 +19,11 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "Django==1.8",
+        "Django==1.11.19",
         "requests",
-        "urllib3>= 1.21.1, < 1.22",
+        "urllib3>=1.24.2",
         "elasticsearch==6.3.0",
         "elasticsearch_dsl==6.2.1",
-        "ElasticMock==1.3.2"
+        "ElasticMock==1.3.6"
     ],
 )
