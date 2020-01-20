@@ -22,7 +22,7 @@ setup(
         "Django==1.11.19",
         "requests",
         "urllib3>=1.24.2",
-        "elasticsearch==6.3.0",
+        "elasticsearch==7.5.1",
         "elasticsearch_dsl==6.2.1",
         "ElasticMock==1.3.6"
     ],
