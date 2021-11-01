@@ -20,7 +20,7 @@ def run_async(func):
     """
     @wraps(func)
     def async_func(*args, **kwargs):
-        run_func_async = kwargs.get('async', True)
+        run_func_async = kwargs.get('async_', True)
         if not run_func_async:
             return func(*args, **kwargs)
 
@@ -52,12 +52,12 @@ def create_mappings(classes):
         Cls.init()
 
 
-def index_data(models, async=False):
+def index_data(models, async_=False):
     """
     Index all needed objects.
 
     :param models: Models that should be indexed.
-    :param async: index data to Elasticsearch asynchronously.
+    :param async_: index data to Elasticsearch asynchronously.
     :return: No return value (Void)
     """
     for model in models:
@@ -68,7 +68,7 @@ def index_data(models, async=False):
             except AttributeError:
                 # In case instance doesn't have can_index function
                 pass
-            obj.indexing(new=True, async=async)
+            obj.indexing(new=True, async_=async_)
 
 
 def update_nested_dict(orig_dict, new_dict):
@@ -93,7 +93,7 @@ def update_nested_dict(orig_dict, new_dict):
 
 
 @run_async
-def index_obj(func, args, kwargs, async=True):
+def index_obj(func, args, kwargs, async_=True):
     """
     Indexes (create/update) object to Elasticsearch.
 
@@ -143,21 +143,21 @@ def es_indexing(func):
         if not is_sync_feature_on():
             return
 
-        run_func_async = kwargs.get('async', True)
-        return index_obj(func, args, kwargs, async=run_func_async)
+        run_func_async = kwargs.get('async_', True)
+        return index_obj(func, args, kwargs, async_=run_func_async)
 
     return func_wrapper
 
 
 @run_async
-def delete_es_document(document_id, index_name, async=True):
+def delete_es_document(document_id, index_name, async_=True):
     """
     Deletes a document from Elasticsearch index.
     In case the deletion process is failed it will log an error.
 
     :param document_id: object id
     :param index_name: ES index name
-    :param async: delete object from Elasticsearch asynchronously.
+    :param async_: delete object from Elasticsearch asynchronously.
     :return: Void
     """
     if not is_sync_feature_on():

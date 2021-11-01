@@ -68,9 +68,9 @@ class Program(models.Model):
     ..
     ..
     
-    # It's optional to add 'async' arg.
+    # It's optional to add 'async_' arg.
     @es_indexing
-    def indexing(self, async=True):
+    def indexing(self, async_=True):
         attrs = dict(
             meta={'id': self.id},
             metadata={
@@ -104,15 +104,15 @@ from es_utils.helpers import delete_es_document
 
 def index_program(sender, instance, created, **kwargs):
     if instance.can_index():
-        instance.indexing(new=created, async=True)
+        instance.indexing(new=created, async_=True)
     elif not created:
         index_name = es_indices.ProgramIndex._index._name
-        delete_es_document(document.id, index_name, async=True)
+        delete_es_document(document.id, index_name, async_=True)
 
 
 def delete_program(sender, instance, **kwargs):
     index_name = es_indices.ProgramIndex._index._name
-    delete_es_document(instance.id, index_name, async=True)
+    delete_es_document(instance.id, index_name, async_=True)
 
 
 for cls_name in settings.ES_SYNC_MODELS:
