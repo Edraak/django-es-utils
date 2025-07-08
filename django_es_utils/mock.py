@@ -13,8 +13,6 @@ class FakeElasticsearch(BaseFakeElasticsearch):
 
     transport = Transport()
 
-    @query_params('consistency', 'op_type', 'parent', 'refresh', 'replication',
-                  'routing', 'timeout', 'timestamp', 'ttl', 'version', 'version_type')
     def index(self, index, doc_type, body, id=None, params=None):
         if index not in self.__documents_dict:
             self.__documents_dict[index] = list()
