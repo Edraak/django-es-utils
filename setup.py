@@ -20,10 +20,10 @@ setup(
     ],
     install_requires=[
         "Django>=5.0.14",
-        "requests==2.32.4",
+        "requests>=2.32.4",
         "urllib3>=2.5.0",
-        "elasticsearch==8.18.1",
-        "elasticsearch_dsl==8.18.0",
-        "ElasticMock==1.8.1"
+        "elasticsearch>=8.18.1",
+        "elasticsearch_dsl>=8.18.0",
+        "ElasticMock>=1.8.1"
     ],
 )

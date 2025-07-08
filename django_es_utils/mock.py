@@ -1,4 +1,3 @@
-from elasticsearch.client.utils import query_params
 from elasticmock.utilities import get_random_id
 from elasticmock.fake_elasticsearch import FakeElasticsearch as BaseFakeElasticsearch
 
