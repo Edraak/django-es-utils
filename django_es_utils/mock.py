@@ -1,4 +1,4 @@
-from elasticmock.utilities import get_random_id
+import uuid
 from elasticmock.fake_elasticsearch import FakeElasticsearch as BaseFakeElasticsearch
 
 
@@ -17,7 +17,7 @@ class FakeElasticsearch(BaseFakeElasticsearch):
             self.__documents_dict[index] = list()
 
         if id is None:
-            id = get_random_id()
+            id = str(uuid.uuid4())
 
         version = 1
 
