@@ -20,7 +20,7 @@ setup(
     ],
     install_requires=[
         "Django>=5.0.14",
-        "requests>=2.31.0",
+        "requests>=2.32.4",
         "urllib3>=1.26.15",
         "elasticsearch>=7.0.0",
         "elasticsearch_dsl>=7.4.1",
